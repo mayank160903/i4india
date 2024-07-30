@@ -1,5 +1,3 @@
-// import "@styles/globals.css";
-
 import Feed from "@components/Feed";
 
 
