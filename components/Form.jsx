@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Editor from "./Editor";
 
 const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
   return (
@@ -30,15 +29,6 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
           />
         </label>
 
-        {/* <label htmlFor="">
-          <span className="font-satoshi font-semibold text-base text-gray-700">
-            Test Input
-          </span>
-          <Editor
-          value={post.prompt}
-          onChange={(e) => setPost({ ...post, prompt: e.target.value })}
-          />
-        </label> */}
 
         <label>
           <span className='font-satoshi font-semibold text-base text-gray-700'>
