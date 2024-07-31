@@ -30,7 +30,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
           />
         </label>
 
-        <label htmlFor="">
+        {/* <label htmlFor="">
           <span className="font-satoshi font-semibold text-base text-gray-700">
             Test Input
           </span>
@@ -38,7 +38,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
           value={post.prompt}
           onChange={(e) => setPost({ ...post, prompt: e.target.value })}
           />
-        </label>
+        </label> */}
 
         <label>
           <span className='font-satoshi font-semibold text-base text-gray-700'>
