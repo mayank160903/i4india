@@ -27,6 +27,8 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             required
             className='form_textarea '
           />
+
+          
         </label>
 
 
