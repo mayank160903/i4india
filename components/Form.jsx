@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Editor from "./Editor";
 
 const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
   return (
@@ -26,6 +27,16 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             placeholder='Write your post here'
             required
             className='form_textarea '
+          />
+        </label>
+
+        <label htmlFor="">
+          <span className="font-satoshi font-semibold text-base text-gray-700">
+            Test Input
+          </span>
+          <Editor
+          value={post.prompt}
+          onChange={(e) => setPost({ ...post, prompt: e.target.value })}
           />
         </label>
 
