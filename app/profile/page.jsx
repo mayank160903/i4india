@@ -10,37 +10,44 @@ const MyProfile = () => {
   const router = useRouter();
   const { data: session } = useSession();
 
-  const [myPosts, setMyPosts] = useState([]);
+  const [newsData, setNewsData] = useState([]);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const response = await fetch(`/api/users/${session?.user.id}/posts`);
-      const data = await response.json();
-
-      setMyPosts(data);
+    const fetchData = async () => {
+      if (session?.user?.email === "mayank.g21@iiits.in") {
+        // Fetch all news if the user is an admin
+        const response = await fetch("/api/news");
+        const data = await response.json();
+        setNewsData(data);
+      } else {
+        // Fetch bookmarked news if the user is not an admin
+        const response = await fetch(`/api/users/${session?.user.id}/bookmarks`);
+        const data = await response.json();
+        setNewsData(data);
+      }
     };
 
-    if (session?.user.id) fetchPosts();
-  }, [session?.user.id]);
+    if (session?.user?.id) fetchData();
+  }, [session?.user?.id]);
 
-  const handleEdit = (post) => {
-    router.push(`/update-prompt?id=${post._id}`);
+  const handleEdit = (news) => {
+    router.push(`/update-news?id=${news}`);
   };
 
-  const handleDelete = async (post) => {
+  const handleDelete = async (news) => {
     const hasConfirmed = confirm(
-      "Are you sure you want to delete this prompt?"
+      "Are you sure you want to delete this news item?"
     );
 
     if (hasConfirmed) {
       try {
-        await fetch(`/api/prompt/${post._id.toString()}`, {
+        await fetch(`/api/news/${news}`, {
           method: "DELETE",
         });
 
-        const filteredPosts = myPosts.filter((item) => item._id !== post._id);
+        const filteredNews = newsData.filter((item) => item._id !== news._id);
 
-        setMyPosts(filteredPosts);
+        setNewsData(filteredNews);
       } catch (error) {
         console.log(error);
       }
@@ -49,11 +56,11 @@ const MyProfile = () => {
 
   return (
     <Profile
-      name='My'
-      desc='Welcome to your personalized profile page. Share your exceptional prompts and inspire others with the power of your imagination'
-      data={myPosts}
-      handleEdit={handleEdit}
-      handleDelete={handleDelete}
+      name={session?.user?.email === "mayank.g21@iiits.in" ?  "Admin" : "My"}
+      desc={session?.user?.email === "mayank.g21@iiits.in" ? "Welcome to the Admin Portal. Add, Edit, or Delete news based on your choice!" :  "Explore all your bookmarked news here."}
+      newsData={newsData}
+      handleEdit={session?.user?.email === "mayank.g21@iiits.in" ? handleEdit : null}
+      handleDelete={session?.user?.email === "mayank.g21@iiits.in" ? handleDelete : null}
     />
   );
 };

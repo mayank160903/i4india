@@ -1,23 +1,57 @@
-import PromptCard from "./PromptCard";
+import { useSession } from "next-auth/react";
+import NewsCardList from "./NewsCardList";
+import CategoryNewsList from "./CategoryNewsList";
 
-const Profile = ({ name, desc, data, handleEdit, handleDelete }) => {
+const Profile = ({ name, desc, newsData, handleEdit, handleDelete }) => {
+  const { data: session } = useSession();
+
+  const categories = [
+    "General",
+    "Business",
+    "Entertainment",
+    "Sports",
+    "Science",
+    "Technology",
+    "Education",
+    "History",
+  ];
+
+  // Get news by category
+  const getNewsByCategory = (category) => {
+    if(session?.user?.email === "mayank.g21@iiits.in"){
+      return newsData?.filter((news) => news.category === category) || [];
+    }
+    else{
+      return newsData;
+    }
+  };
+
   return (
-    <section className='w-full'>
-      <h1 className='head_text text-left'>
-        <span className='blue_gradient'>{name} Profile</span>
-      </h1>
-      <p className='desc text-left'>{desc}</p>
+    <section className="w-full">
+      <h1 className="head_text text-center">
+        {session?.user?.email !== "mayank.g21@iiits.in" ? (<div>
+          <span className="blue_gradient">{name} Bookmarks</span>
 
-      <div className='mt-10 prompt_layout'>
-        {data.map((post) => (
-          <PromptCard
-            key={post._id}
-            post={post}
-            handleEdit={() => handleEdit && handleEdit(post)}
-            handleDelete={() => handleDelete && handleDelete(post)}
+        </div>) : (<div>
+          <span className="blue_gradient">{name} Portal</span>
+        </div>)}
+        
+      </h1>
+      <p className=" text-center">{desc}</p>
+
+      { session?.user?.email === "mayank.g21@iiits.in" ? (<div className="mt-10">
+        {categories.map((category) => (
+          <NewsCardList
+            key={category}
+            newsData={getNewsByCategory(category)}
+            category={category}
+            handleEdit={handleEdit ? handleEdit : null}
+            handleDelete={handleDelete ? handleDelete : null}
           />
         ))}
-      </div>
+      </div>) : (<div className="items-center ml-12">
+        <CategoryNewsList newsData={newsData} />
+      </div>)}
     </section>
   );
 };

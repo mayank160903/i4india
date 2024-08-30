@@ -1,6 +1,8 @@
+const mongoose = require('mongoose');
 import { Schema, model, models } from "mongoose";
 
 const UserSchema = new Schema({
+    name: String,
     email:{
         type: String,
         unique: [true, 'Email already exists!'],
@@ -8,12 +10,13 @@ const UserSchema = new Schema({
     },
     username: {
         type: String,
-        required: [true, 'Username is required'],
-        match: [/^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/, "Username invalid, it should contain 8-20 alphanumeric letters and be unique!"]
+        required: [true, 'Username is required']
     },
     image:{
         type: String,
-    }
+    },
+    isAdmin: { type: Boolean, default: false },
+    bookmarkedNews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'News' }]
 })
 
 const User = models.User || model("User", UserSchema)

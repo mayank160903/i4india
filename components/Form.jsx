@@ -1,14 +1,14 @@
+
 import Link from "next/link";
 
 const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
   return (
-    <section className='w-full max-w-full flex-start flex-col'>
+    <section className='w-full max-w-full flex-center flex-col'>
       <h1 className='head_text text-left'>
-        <span className='blue_gradient'>{type} Post</span>
+        <span className='blue_gradient'>{type} News</span>
       </h1>
       <p className='desc text-left max-w-md'>
-        {type} and share amazing prompts with the world, and let your
-        imagination run wild with any AI-powered platform
+        {type} and share news with the world, categorized for better reach and visibility.
       </p>
 
       <form
@@ -17,36 +17,65 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
       >
         <label>
           <span className='font-satoshi font-semibold text-base text-gray-700'>
-            Your AI Prompt
-          </span>
-
-          <textarea
-            value={post.prompt}
-            onChange={(e) => setPost({ ...post, prompt: e.target.value })}
-            placeholder='Write your post here'
-            required
-            className='form_textarea '
-          />
-
-          
-        </label>
-
-
-        <label>
-          <span className='font-satoshi font-semibold text-base text-gray-700'>
-            Field of Prompt{" "}
-            <span className='font-normal'>
-              (#product, #webdevelopment, #idea, etc.)
-            </span>
+            YouTube Video URL
           </span>
           <input
-            value={post.tag}
-            onChange={(e) => setPost({ ...post, tag: e.target.value })}
+            value={post.videoUrl}
+            onChange={(e) => setPost({ ...post, videoUrl: e.target.value })}
             type='text'
-            placeholder='#Tag'
+            placeholder='Enter the YouTube video URL'
             required
             className='form_input'
           />
+        </label>
+
+        <label>
+          <span className='font-satoshi font-semibold text-base text-gray-700'>
+            Title
+          </span>
+          <input
+            value={post.title}
+            onChange={(e) => setPost({ ...post, title: e.target.value })}
+            type='text'
+            placeholder='Enter the news title'
+            required
+            className='form_input'
+          />
+        </label>
+
+        <label>
+          <span className='font-satoshi font-semibold text-base text-gray-700'>
+            Description
+          </span>
+          <textarea
+            value={post.description}
+            onChange={(e) => setPost({ ...post, description: e.target.value })}
+            placeholder='Write the news description here'
+            required
+            className='form_textarea '
+          />
+        </label>
+
+        <label>
+          <span className='font-satoshi font-semibold text-base text-gray-700'>
+            Category
+          </span>
+          <select
+            value={post.category}
+            onChange={(e) => setPost({ ...post, category: e.target.value })}
+            required
+            className='form_input'
+          >
+            <option value='' disabled>Select a category</option>
+            <option value='General'>General</option>
+            <option value='Business'>Business</option>
+            <option value='Entertainment'>Entertainment</option>
+            <option value='Sports'>Sports</option>
+            <option value='Science'>Science</option>
+            <option value='Technology'>Technology</option>
+            <option value='Education'>Education</option>
+            <option value='History'>History</option>
+          </select>
         </label>
 
         <div className='flex-end mx-3 mb-5 gap-4'>
@@ -57,9 +86,9 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
           <button
             type='submit'
             disabled={submitting}
-            className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white'
+            className='px-5 py-1.5 text-sm bg-blue-500 rounded-full text-white'
           >
-            {submitting ? `${type}ing...` : type}
+            {submitting ? (type === 'Create' ? 'Creating' : 'Updating') : type}
           </button>
         </div>
       </form>

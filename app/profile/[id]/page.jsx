@@ -9,24 +9,24 @@ const UserProfile = ({ params }) => {
   const searchParams = useSearchParams();
   const userName = searchParams.get("name");
 
-  const [userPosts, setUserPosts] = useState([]);
+  const [userBookmarks, setUserBookmarks] = useState([]);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const response = await fetch(`/api/users/${params?.id}/posts`);
+    const fetchBookmarks = async () => {
+      const response = await fetch(`/api/users/${params?.id}/bookmarks`);
       const data = await response.json();
 
-      setUserPosts(data);
+      setUserBookmarks(data);
     };
 
-    if (params?.id) fetchPosts();
+    if (params?.id) fetchBookmarks();
   }, [params.id]);
 
   return (
     <Profile
       name={userName}
-      desc={`Welcome to ${userName}'s personalized profile page. Explore ${userName}'s exceptional prompts and be inspired by the power of their imagination`}
-      data={userPosts}
+      desc={`Welcome to ${userName}'s personalized profile page. Explore ${userName}'s bookmarked news.`}
+      newsData={userBookmarks}
     />
   );
 };
