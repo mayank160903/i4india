@@ -1,9 +1,9 @@
 import News from '@/models/News';
 import User from '@/models/user';
-import dbConnect from '@/utils/dbConnect';
+import { connectToDB } from '@utils/database';
 
 export async function POST(req, res) {
-  await dbConnect();
+  await connectToDB();
 
   const session = await getSession({ req }); // Assuming you're using next-auth
   if (!session || !session.user.isAdmin) {
@@ -22,7 +22,7 @@ export async function POST(req, res) {
 }
 
 export async function PUT(req, res) {
-  await dbConnect();
+  await connectToDB();
 
   const session = await getSession({ req });
   if (!session || !session.user.isAdmin) {
@@ -40,7 +40,7 @@ export async function PUT(req, res) {
 }
 
 export async function DELETE(req, res) {
-  await dbConnect();
+  await connectToDB();
 
   const session = await getSession({ req });
   if (!session || !session.user.isAdmin) {
