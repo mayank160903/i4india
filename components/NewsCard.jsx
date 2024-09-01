@@ -130,10 +130,10 @@ const NewsCard = ({ news, handleEdit, handleDelete }) => {
         ) : (
           <Image
             src="/assets/icons/i4india.png"
-            width={200}
-            height={30}
+            width={300}
+            height={100}
             alt="logo"
-            className="mx-auto"
+            className=""
           />
         )}
       </div>
