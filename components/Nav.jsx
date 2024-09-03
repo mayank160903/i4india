@@ -57,18 +57,28 @@ const Nav = () => {
         </div>
 
         {session?.user?.email !== "mayank.g21@iiits.in" ? (
-          <Link href="/contactus" className="text-md mr-10 font-semibold leading-6 text-gray-900 hover:text-gray-700">
-            Contact Us
-          </Link>
-        ) : (
-            <Link href="/contacts" className="text-md mr-10 font-semibold leading-6 text-gray-900 hover:text-gray-700">
-            Messages
-          </Link>
-          )}
+  <Link
+    href="/contactus"
+    className="text-xs sm:text-sm md:text-md mr-10 font-semibold leading-6 text-gray-900 hover:text-gray-700"
+  >
+    Contact Us
+  </Link>
+) : (
+  <Link
+    href="/contacts"
+    className="text-xs sm:text-sm md:text-md mr-10 font-semibold leading-6 text-gray-900 hover:text-gray-700"
+  >
+    Messages
+  </Link>
+)}
 
-        <Link href="/about" className="text-md mr-10 font-semibold leading-6 text-gray-900 hover:text-gray-700">
-            About Us
-          </Link>
+<Link
+  href="/about"
+  className="text-xs sm:text-sm md:text-md mr-10 font-semibold leading-6 text-gray-900 hover:text-gray-700"
+>
+  About Us
+</Link>
+
 
         {/* Mobile Menu Button */}
         <div className="flex items-center lg:hidden">

@@ -20,7 +20,7 @@ const PopularCard = ({ popularNews }) => {
       </div>
 
       {/* Grid of smaller news items */}
-      <div className="grid grid-cols-5 gap-4">
+      <div className="hidden md:grid grid-cols-5 gap-4">
         {popularNews.slice(2, 7).map((news, index) => (
           <div key={index}>
             <GridNewsCard

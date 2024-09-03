@@ -117,7 +117,7 @@ const Feed = () => {
   return (
     <section className="feed">
       {/* Search Input */}
-      <form className="relative mx-10 w-96 flex-center">
+      <form className="relative mx-10 w-80 flex-center">
         <input
           type="text"
           placeholder="Search by title, category, or description"
