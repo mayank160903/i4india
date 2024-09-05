@@ -13,11 +13,18 @@ const handler = NextAuth({
   ],
   callbacks: {
     async session({ session }) {
-      // store the user id from MongoDB to session
-      const sessionUser = await User.findOne({ email: session.user.email });
-      session.user.id = sessionUser._id.toString();
-
-      return session;
+      try {
+        const sessionUser = await User.findOne({ email: session.user.email });
+        if (sessionUser) {
+          session.user.id = sessionUser._id.toString();
+        } else {
+          console.error("User not found in session callback.");
+        }
+        return session;
+      } catch (error) {
+        console.error("Error in session callback:", error.message);
+        throw new Error("Failed to retrieve session user.");
+      }
     },
     async signIn({ account, profile, user, credentials }) {
       try {
@@ -35,10 +42,10 @@ const handler = NextAuth({
           });
         }
 
-        return true
+        return true;
       } catch (error) {
         console.log("Error checking if user exists: ", error.message);
-        return false
+        return false;
       }
     },
   }

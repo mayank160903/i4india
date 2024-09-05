@@ -16,23 +16,24 @@ export const GET = async (request, { params }) => {
 }
 
 export const PATCH = async (request, { params }) => {
-    const { news, tag } = await request.json();
+    
 
     try {
+        const { news, tag } = await request.json();
+
         await connectToDB();
 
         // Find the existing news by ID
         const existingPrompt = await News.findById(params.id);
         console.log(existingPrompt);
 
-
         if (!existingPrompt) {
             return new Response("News not found", { status: 404 });
         }
 
         // Update the news with new data
-        existingPrompt.news = news;
-        existingPrompt.tag = tag;
+        if (news) existingNews.news = news;
+        if (tag) existingNews.tag = tag;
 
         await existingPrompt.save();
 
@@ -51,6 +52,7 @@ export const DELETE = async (request, { params }) => {
 
         return new Response("News deleted successfully", { status: 200 });
     } catch (error) {
+        console.error("error updating news:", error);
         return new Response("Error deleting news", { status: 500 });
     }
 };
