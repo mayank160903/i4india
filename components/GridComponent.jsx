@@ -7,13 +7,13 @@ const GridComponent = ({ latestNews }) => {
   return (
     <div className="grid gap-4">
       {/* Top row: Two larger news cards side by side */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="md:grid sm:grid-cols-2 gap-4">
         {latestNews.slice(0, 2).map((news, index) => (
           <div key={index}>
             <GridNewsCard
               news={news}
               height="300"
-              className="h-300 max-w-full rounded-lg"
+              className="h-300 my-3 max-w-full rounded-lg"
             />
           </div>
         ))}

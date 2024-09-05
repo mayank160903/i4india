@@ -35,7 +35,7 @@ const GridNewsCard = ({ news, className, height }) => {
           <Image src="/assets/icons/i4india.png" width={250} height={96} alt="logo" />
         )}
       </div>
-      <div className="p-5 text-sm lg:flex items-center justify-between">
+      <div className="pb-4 p-3 text-sm lg:flex items-center justify-between">
         <div className="font-normal text-gray-700 dark:text-gray-400">
           {new Date(news.createdAt).toLocaleDateString()}
         </div>

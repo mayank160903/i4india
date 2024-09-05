@@ -2,7 +2,6 @@
 
 import { usePathname } from "next/navigation";
 import ParentComponent from "./ParentComponent";
-import PopularParent from "./PopularParent";
 
 const DynamicHero = () => {
   const pathname = usePathname();
@@ -11,7 +10,6 @@ const DynamicHero = () => {
   if (pathname === "/") {
     return <>
     <ParentComponent />
-    <PopularParent />
     </>;
   }
 

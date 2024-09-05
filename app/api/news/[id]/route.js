@@ -23,6 +23,8 @@ export const PATCH = async (request, { params }) => {
 
         // Find the existing news by ID
         const existingPrompt = await News.findById(params.id);
+        console.log(existingPrompt);
+
 
         if (!existingPrompt) {
             return new Response("News not found", { status: 404 });

@@ -107,7 +107,7 @@
 }
 
 .search_input {
-  @apply block w-full rounded-md border border-gray-200 bg-white py-2.5 font-satoshi pl-5 pr-12 text-sm shadow-lg font-medium focus:border-black focus:outline-none focus:ring-0;
+  @apply block w-full border border-gray-200 bg-white py-3 font-satoshi text-sm shadow-lg font-medium focus:border-black focus:outline-none focus:ring-0;
 }
 
 .copy_btn {
@@ -137,6 +137,44 @@
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+/* Add this to your global CSS if not using a Tailwind plugin */
+
+
+/* Custom scrollbar styling */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #6b7280; /* Thumb color */
+  border-radius: 16px; /* Rounded scrollbar thumb */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #374151; /* Thumb color on hover */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent; /* Transparent track */
+}
+
+.custom-scrollbar::-webkit-scrollbar-button {
+  display: none; /* Hides the arrows */
+}
+
+/* For Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #6b7280 transparent;
+}
+
+.custom-scrollbar::-moz-scrollbar-button {
+  display: none; /* Hide arrows in Firefox */
+}
+
+
 
 
 
@@ -193,7 +231,7 @@
   margin: 1.25rem;
   border-radius: 0.5rem;
   overflow: hidden; /* Ensures the pseudo-element does not overflow */
-  background-color: rgba(116, 209, 232, 0.766);
+  background-color: white;
 }
 
 .parent-container::before {

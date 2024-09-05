@@ -1,10 +1,15 @@
+"use client";
+
 import "@styles/globals.css";
 import Nav from "@components/Nav";
 import Provider from "@components/Provider";
 import Footer from "@components/Footer";
 import DynamicHero from "@components/DynamicHero"; // New client-side component
+import { useState } from "react";
 
 export default function RootLayout({ children }) {
+  const [searchQuery, setSearchQuery] = useState("");
+
   return (
     <html lang="en">
       <body>
@@ -14,7 +19,7 @@ export default function RootLayout({ children }) {
           </div>
 
           <main className="app">
-            <Nav />
+            <Nav searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
             <DynamicHero />
             {children}
             <Footer />

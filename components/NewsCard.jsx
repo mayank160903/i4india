@@ -141,9 +141,6 @@ const NewsCard = ({ news, handleEdit, handleDelete }) => {
         <h5 className="mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
           {news.title}
         </h5>
-        {/* <p className="mb-4 font-normal text-gray-700 dark:text-gray-400">
-          {news.description}
-        </p> */}
         <p className="mb-4 font-normal text-gray-700 dark:text-gray-400">
           {showFullDescription
             ? news.description
