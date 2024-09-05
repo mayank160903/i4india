@@ -7,7 +7,6 @@ export const GET = async (request) => {
 
     // Try fetching the data without populate first
     const newsData = await News.find({});
-    console.log(newsData);
 
     return new Response(JSON.stringify(newsData), {
       status: 200,

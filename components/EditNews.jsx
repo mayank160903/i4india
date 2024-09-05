@@ -49,8 +49,9 @@ const EditNews = () => {
     if (!newsId) return alert("News ID not found!");
 
     try {
+
       const response = await fetch(`/api/news/${newsId}`, {
-        method: "PATCH",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },

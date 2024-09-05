@@ -103,21 +103,39 @@ const Nav = ({ searchQuery, setSearchQuery }) => {
           </Link>
         </div>
 
-        <div className="relative md:mr-12 flex items-center">
-          <input
-            type="text"
-            placeholder="Search news..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="search_input peer"
-          />
-          <button
-            onClick={handleSearch}
-            className="p-3 bg-gray-800 text-white hover:bg-gray-700"
-          >
-            <MagnifyingGlassIcon className="h-5 w-5" />
-          </button>
-        </div>
+        <div className="relative md:mr-12 flex items-center w-full max-w-md">
+  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+    <svg
+      className="w-4 h-4 text-gray-500 dark:text-gray-400"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 20 20"
+    >
+      <path
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+      />
+    </svg>
+  </div>
+  <input
+    type="text"
+    placeholder="Search News here"
+    value={searchQuery}
+    onChange={(e) => setSearchQuery(e.target.value)}
+    className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+  />
+  <button
+    onClick={handleSearch}
+    className="text-white absolute right-2.5 bottom-2.5 bg-gray-900 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+  >
+    Search
+  </button>
+</div>
+
 
         {/* Mobile Menu Button */}
         <div className="flex items-center lg:hidden">

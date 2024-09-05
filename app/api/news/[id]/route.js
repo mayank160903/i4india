@@ -15,32 +15,33 @@ export const GET = async (request, { params }) => {
     }
 }
 
-export const PATCH = async (request, { params }) => {
-    
+export const PUT = async (request, { params }) => {
 
     try {
-        const { news, tag } = await request.json();
-
+        const { videoUrl, title, description, category } = await request.json();
+        
         await connectToDB();
-
+    
         // Find the existing news by ID
-        const existingPrompt = await News.findById(params.id);
-        console.log(existingPrompt);
-
-        if (!existingPrompt) {
-            return new Response("News not found", { status: 404 });
+        const existingNews = await News.findById(params.id);
+    
+        if (!existingNews) {
+          return new Response("News not found", { status: 404 });
         }
-
+    
         // Update the news with new data
-        if (news) existingNews.news = news;
-        if (tag) existingNews.tag = tag;
-
-        await existingPrompt.save();
-
-        return new Response("Successfully updated the Prompts", { status: 200 });
-    } catch (error) {
+        if (videoUrl) existingNews.videoUrl = videoUrl;
+        if (title) existingNews.title = title;
+        if (description) existingNews.description = description;
+        if (category) existingNews.category = category;
+    
+        await existingNews.save();
+    
+        return new Response("Successfully updated the news", { status: 200 });
+      } catch (error) {
+        console.error("Error Updating News:", error);
         return new Response("Error Updating News", { status: 500 });
-    }
+      }
 };
 
 export const DELETE = async (request, { params }) => {
