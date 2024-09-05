@@ -10,17 +10,39 @@ const UserProfile = ({ params }) => {
   const userName = searchParams.get("name");
 
   const [userBookmarks, setUserBookmarks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null); // State to handle error
 
   useEffect(() => {
     const fetchBookmarks = async () => {
-      const response = await fetch(`/api/users/${params?.id}/bookmarks`);
-      const data = await response.json();
+      try {
+        const response = await fetch(`/api/users/${params?.id}/bookmarks`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch bookmarks");
+        }
 
-      setUserBookmarks(data);
+        const data = await response.json();
+
+        // Ensure that the data is an array
+        if (Array.isArray(data)) {
+          setUserBookmarks(data);
+        } else {
+          setUserBookmarks([]); // Set to empty array if not an array
+          throw new Error("Invalid data format: Expected an array");
+        }
+      } catch (error) {
+        console.error("Error fetching bookmarks:", error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
     };
 
     if (params?.id) fetchBookmarks();
   }, [params.id]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>; // Display error message
 
   return (
     <Profile

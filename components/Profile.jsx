@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import NewsCardList from "./NewsCardList";
 import CategoryNewsList from "./CategoryNewsList";
 
-const Profile = ({ name, desc, newsData, handleEdit, handleDelete }) => {
+const Profile = ({ name, desc, newsData = [], handleEdit, handleDelete }) => {
   const { data: session } = useSession();
 
   const categories = [
@@ -20,8 +20,7 @@ const Profile = ({ name, desc, newsData, handleEdit, handleDelete }) => {
   const getNewsByCategory = (category) => {
     if(session?.user?.email === "mayank.g21@iiits.in"){
       return newsData?.filter((news) => news.category === category) || [];
-    }
-    else{
+    } else {
       return newsData;
     }
   };
@@ -29,29 +28,35 @@ const Profile = ({ name, desc, newsData, handleEdit, handleDelete }) => {
   return (
     <section className="w-full">
       <h1 className="head_text text-center">
-        {session?.user?.email !== "mayank.g21@iiits.in" ? (<div>
-          <span className="blue_gradient">{name} Bookmarks</span>
-
-        </div>) : (<div>
-          <span className="blue_gradient">{name} Portal</span>
-        </div>)}
-        
+        {session?.user?.email !== "mayank.g21@iiits.in" ? (
+          <div>
+            <span className="blue_gradient">{name} Bookmarks</span>
+          </div>
+        ) : (
+          <div>
+            <span className="blue_gradient">{name} Portal</span>
+          </div>
+        )}
       </h1>
-      <p className=" text-center">{desc}</p>
+      <p className="text-center">{desc}</p>
 
-      { session?.user?.email === "mayank.g21@iiits.in" ? (<div className="mt-10">
-        {categories.map((category) => (
-          <NewsCardList
-            key={category}
-            newsData={getNewsByCategory(category)}
-            category={category}
-            handleEdit={handleEdit ? handleEdit : null}
-            handleDelete={handleDelete ? handleDelete : null}
-          />
-        ))}
-      </div>) : (<div className="items-center ml-12">
-        <CategoryNewsList newsData={newsData} />
-      </div>)}
+      {session?.user?.email === "mayank.g21@iiits.in" ? (
+        <div className="mt-10">
+          {categories.map((category) => (
+            <NewsCardList
+              key={category}
+              newsData={getNewsByCategory(category)}
+              category={category}
+              handleEdit={handleEdit ? handleEdit : null}
+              handleDelete={handleDelete ? handleDelete : null}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="items-center ml-12">
+          <CategoryNewsList newsData={newsData} />
+        </div>
+      )}
     </section>
   );
 };
