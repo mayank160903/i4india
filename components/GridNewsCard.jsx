@@ -18,7 +18,7 @@ const GridNewsCard = ({ news, className, height }) => {
   const embedUrl = getEmbedUrl(news.videoUrl);
 
   return (
-    <div className={`bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ${className}`}>
+    <div className={`bg-white rounded-sm dark:bg-gray-800 ${className}`}>
       <div className="video_container">
         {embedUrl ? (
           <iframe
@@ -29,20 +29,21 @@ const GridNewsCard = ({ news, className, height }) => {
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            className="rounded-t-lg"
+            className="rounded-t-sm"
           ></iframe>
         ) : (
           <Image src="/assets/icons/i4india.png" width={250} height={96} alt="logo" />
         )}
       </div>
-      <div className="pb-4 p-3 text-sm lg:flex items-center justify-between">
-        <div className="font-normal text-gray-700 dark:text-gray-400">
-          {new Date(news.createdAt).toLocaleDateString()}
-        </div>
-        <div className="bg-blue-200 bg-opacity-60 px-2 py-1 rounded-lg items-center">
-            {news.category}
+      <div className="p-4">
+        <h2 className="font-bold text-lg mb-2 text-black">{news.title}</h2>
+        <p className="text-gray-700 mb-3">{news.description}</p>
+        <div className="flex justify-between items-center">
+          <span className="text-gray-500 text-sm">{new Date(news.createdAt).toLocaleDateString()}</span>
+          <span className="text-white bg-gray-700 px-2 py-1 rounded-sm">{news.category}</span>
         </div>
       </div>
+      <hr />
     </div>
   );
 };

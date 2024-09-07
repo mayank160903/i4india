@@ -75,7 +75,7 @@ const Nav = ({ searchQuery, setSearchQuery }) => {
   };
 
   return (
-    <header className="bg-white shadow-md w-full">
+    <header className="bg-white playfair-display-font shadow-md w-full">
       <nav
         aria-label="Global"
         className="mx-auto flex items-center justify-evenly py-6 px-4 lg:px-8"
@@ -278,11 +278,11 @@ const Nav = ({ searchQuery, setSearchQuery }) => {
       <Dialog
         open={mobileMenuOpen}
         onClose={setMobileMenuOpen}
-        className="lg:hidden"
+        className="lg:hidden "
       >
-        <div className="fixed inset-0 z-10" />
+        <div className="fixed playfair-display-font inset-0 z-10" />
         <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between ">
             <Link href="/" className="-m-1.5 p-1.5 flex items-center">
               <Image
                 src="/assets/icons/i4india.png"
@@ -300,7 +300,7 @@ const Nav = ({ searchQuery, setSearchQuery }) => {
             </button>
           </div>
 
-          <div className="mt-6 flow-root">
+          <div className="mt-6 flow-root playfair-display-font">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
                 {/* Mobile Category Dropdown */}
@@ -351,11 +351,21 @@ const Nav = ({ searchQuery, setSearchQuery }) => {
                     {session?.user?.email === "mayank.g21@iiits.in" && (
                       <Link
                         href="/create-news"
-                        className="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                        className="block rounded-lg py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                       >
                         Create News
                       </Link>
+                      
                     )}
+                    {/* {session?.user?.email === "mayank.g21@iiits.in" && (
+                      <Link
+                        href="/statistics"
+                        className="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                      >
+                        Statistics
+                      </Link>
+                      
+                    )} */}
                     {session?.user?.email !== "mayank.g21@iiits.in" && (
                       <Link
                         href="/profile"
@@ -367,7 +377,7 @@ const Nav = ({ searchQuery, setSearchQuery }) => {
                     {session?.user?.email === "mayank.g21@iiits.in" && (
                       <Link
                         href="/profile"
-                        className="flex justify-between rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                        className="flex justify-between rounded-lg py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                       >
                         <div>Admin Portal</div>
                         <div>
@@ -381,10 +391,11 @@ const Nav = ({ searchQuery, setSearchQuery }) => {
                         </div>
                       </Link>
                     )}
+                    <hr />
                     <button
                       type="button"
                       onClick={signOut}
-                      className="block w-full text-left rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                      className="text-lg font-serif font-extralight p-2 bg-black rounded-sm leading-6 text-white hover:bg-slate-800"
                     >
                       Sign Out
                     </button>
@@ -395,7 +406,7 @@ const Nav = ({ searchQuery, setSearchQuery }) => {
                     <button
                       key={provider.name}
                       onClick={() => signIn(provider.id)}
-                      className="block w-full text-left rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                      className="text-lg font-serif font-extralight p-2 bg-black rounded-sm leading-6 text-white hover:bg-slate-800"
                     >
                       Sign In
                     </button>

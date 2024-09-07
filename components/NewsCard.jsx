@@ -114,7 +114,7 @@ const NewsCard = ({ news, handleEdit, handleDelete }) => {
   const embedUrl = getEmbedUrl(news.videoUrl);
 
   return (
-    <div className="bg-white w-96 border max-w-2xl border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 my-4 p-4 flex flex-col justify-between">
+    <div className="bg-white playfair-display-font-content w-96 border max-w-2xl border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 my-4 p-4 flex flex-col justify-between">
       <div className="video_container mb-4">
         {embedUrl ? (
           <iframe
@@ -125,7 +125,7 @@ const NewsCard = ({ news, handleEdit, handleDelete }) => {
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            className="rounded-t-lg"
+            className=""
           ></iframe>
         ) : (
           <Image
@@ -138,10 +138,10 @@ const NewsCard = ({ news, handleEdit, handleDelete }) => {
         )}
       </div>
       <div className="flex-grow">
-        <h5 className="mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+        <h5 className="mb-2 text-xl playfair-display-font tracking-tight text-gray-900 dark:text-white">
           {news.title}
         </h5>
-        <p className="mb-4 font-normal text-gray-700 dark:text-gray-400">
+        <p className="mb-4 text-gray-700 dark:text-gray-400">
           {showFullDescription
             ? news.description
             : news.description.slice(0, DESCRIPTION_LIMIT)}
@@ -159,7 +159,13 @@ const NewsCard = ({ news, handleEdit, handleDelete }) => {
         </p>
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center text-gray-700 dark:text-gray-300">
-            <svg
+            {isBookmarked ? (<div>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+  <path fill-rule="evenodd" d="M6.32 2.577a49.255 49.255 0 0 1 11.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 0 1-1.085.67L12 18.089l-7.165 3.583A.75.75 0 0 1 3.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93Z" clip-rule="evenodd" />
+</svg>
+
+            </div>) : (<div>
+              <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -173,6 +179,8 @@ const NewsCard = ({ news, handleEdit, handleDelete }) => {
                 d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z"
               />
             </svg>
+            </div>)}
+            
             <span className="ml-2">{news.bookmarks?.length || 0}</span>
             <button className="ml-5 items-center" onClick={handleShare}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-5">
@@ -228,7 +236,7 @@ const NewsCard = ({ news, handleEdit, handleDelete }) => {
 
       {!isBookmarked && session?.user && session?.user?.email !== "mayank.g21@iiits.in" && (
         <button
-          className="mt-4 w-full inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300"
+          className="mt-4 w-full inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-700 rounded-lg hover:bg-gray-900 focus:ring-4 focus:ring-blue-300"
           onClick={handleBookmark}
         >
           Add to bookmarks

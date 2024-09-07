@@ -7,7 +7,7 @@ const Footer = () => {
     const { data: session } = useSession();
 
   return (
-    <div className='mt-5 w-full'>
+    <div className='mt-5 w-full playfair-display-font'>
                 <hr className="border-gray-200 dark:border-gray-700"/>
         <footer className="bg-white dark:bg-gray-900">
     <div className="container px-6 py-12 mx-auto">
