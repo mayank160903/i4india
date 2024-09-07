@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import React from "react";
+import Link from "next/link";
 
 const GridNewsCard = ({ news, className, height }) => {
   const extractVideoId = (url) => {
@@ -40,7 +41,7 @@ const GridNewsCard = ({ news, className, height }) => {
         <p className="text-gray-700 mb-3">{news.description}</p>
         <div className="flex justify-between items-center">
           <span className="text-gray-500 text-sm">{new Date(news.createdAt).toLocaleDateString()}</span>
-          <span className="text-white bg-gray-700 px-2 py-1 rounded-sm">{news.category}</span>
+          <Link href={"/pages/category/"+news.category.toLowerCase()} className="text-white bg-gray-700 px-2 py-1 rounded-sm">{news.category}</Link>
         </div>
       </div>
       <hr />
