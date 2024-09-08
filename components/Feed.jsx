@@ -47,9 +47,16 @@ const Feed = () => {
   const fetchNews = async () => {
     try {
       const response = await fetch("/api/news");
-      const data = await response.json();
+      let data = await response.json();
+
+      data = Array.isArray(data)
+        ? data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        : [];
+
+      setAllNews(data);
       // Ensure data is an array before setting it
-      setAllNews(Array.isArray(data) ? data : []);
+      
+      // setAllNews(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error("Error fetching news:", error);
       setAllNews([]); // Set to an empty array on error

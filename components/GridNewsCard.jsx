@@ -44,7 +44,7 @@ const GridNewsCard = ({ news, className, height }) => {
           <Link href={"/pages/category/"+news.category.toLowerCase()} className="text-white bg-gray-700 px-2 py-1 rounded-sm">{news.category}</Link>
         </div>
       </div>
-      <hr />
+      
     </div>
   );
 };
