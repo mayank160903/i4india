@@ -27,7 +27,6 @@ const EditNews = () => {
 
         const data = await response.json();
 
-        // Set the fetched data into the form
         setPost({
           videoUrl: data.videoUrl || "",
           title: data.title || "",

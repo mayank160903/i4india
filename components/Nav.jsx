@@ -57,21 +57,6 @@ const Nav = ({ searchQuery, setSearchQuery }) => {
     if (!searchQuery.trim()) return;
 
     router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
-
-    // try {
-    //   const response = await fetch(`/api/search?q=${searchQuery}`);
-    //   if (response.ok) {
-    //     const searchResults = await response.json();
-    //     router.push({
-    //       pathname: '/search-results',
-    //       query: { results: JSON.stringify(searchResults), query: searchQuery }
-    //     });
-    //   } else {
-    //     console.error("Failed to fetch search results.");
-    //   }
-    // } catch (error) {
-    //   console.error("Error searching:", error);
-    // }
   };
 
   return (
@@ -278,7 +263,7 @@ const Nav = ({ searchQuery, setSearchQuery }) => {
       <Dialog
         open={mobileMenuOpen}
         onClose={setMobileMenuOpen}
-        className="lg:hidden "
+        className="lg:hidden playfair-display-font"
       >
         <div className="fixed playfair-display-font inset-0 z-10" />
         <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
@@ -357,15 +342,7 @@ const Nav = ({ searchQuery, setSearchQuery }) => {
                       </Link>
                       
                     )}
-                    {/* {session?.user?.email === "mayank.g21@iiits.in" && (
-                      <Link
-                        href="/statistics"
-                        className="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                      >
-                        Statistics
-                      </Link>
-                      
-                    )} */}
+                  
                     {session?.user?.email !== "mayank.g21@iiits.in" && (
                       <Link
                         href="/profile"

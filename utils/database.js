@@ -21,5 +21,3 @@ export const connectToDB = async () => {
         console.log(err);
     }
 }
-
-// mongodb pass: Z932cYwx8vAr6bQ5

@@ -5,7 +5,7 @@ import { connectToDB } from '@utils/database';
 export async function POST(req, res) {
   await connectToDB();
 
-  const session = await getSession({ req }); // Assuming you're using next-auth
+  const session = await getSession({ req }); 
   if (!session || !session.user.isAdmin) {
     return res.status(403).json({ message: 'Forbidden' });
   }

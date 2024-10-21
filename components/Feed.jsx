@@ -23,7 +23,7 @@ const NewsCardList = ({ newsData, category }) => {
         <div className="bg-blue-100 bg-opacity-55 rounded-lg font-light w-full text-black p-3">{category}</div>
       </div>
       <div className="relative">
-        {/* Scrollable area with custom scrollbar */}
+
         <div
           ref={scrollRef}
           className="flex overflow-x-auto gap-6 scrollbar-hide hover:scrollbar-visible scroll-smooth custom-scrollbar"
@@ -43,7 +43,7 @@ const NewsCardList = ({ newsData, category }) => {
 const Feed = () => {
   const [allNews, setAllNews] = useState([]);
 
-  // Fetch news data from the API
+
   const fetchNews = async () => {
     try {
       const response = await fetch("/api/news");
@@ -54,12 +54,10 @@ const Feed = () => {
         : [];
 
       setAllNews(data);
-      // Ensure data is an array before setting it
-      
-      // setAllNews(Array.isArray(data) ? data : []);
+
     } catch (error) {
       console.error("Error fetching news:", error);
-      setAllNews([]); // Set to an empty array on error
+      setAllNews([]); 
     }
   };
 
@@ -67,9 +65,8 @@ const Feed = () => {
     fetchNews();
   }, []);
 
-  // Get news by category
   const getNewsByCategory = (category) => {
-    // Ensure allNews is an array before filtering
+
     return Array.isArray(allNews)
       ? allNews.filter((news) => news.category === category)
       : [];

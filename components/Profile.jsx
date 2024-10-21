@@ -16,7 +16,6 @@ const Profile = ({ name, desc, newsData = [], handleEdit, handleDelete }) => {
     "History",
   ];
 
-  // Get news by category
   const getNewsByCategory = (category) => {
     if(session?.user?.email === "mayank.g21@iiits.in"){
       return newsData?.filter((news) => news.category === category) || [];

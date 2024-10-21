@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { connectToDB } from '@utils/database';
-import Contact from '@models/Contact'; // Assuming you have the Contact schema
+import Contact from '@models/Contact'; 
 
 export async function POST(request) {
   try {

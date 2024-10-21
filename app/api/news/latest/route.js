@@ -5,7 +5,6 @@ export const GET = async (req) => {
   try {
     await connectToDB();
 
-    // Fetch the latest 4 news articles sorted by creation date (newest first)
     const latestNews = await News.find().sort({ createdAt: -1 }).limit(7);
 
     return new Response(JSON.stringify(latestNews), {

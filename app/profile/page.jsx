@@ -15,12 +15,12 @@ const MyProfile = () => {
   useEffect(() => {
     const fetchData = async () => {
       if (session?.user?.email === "mayank.g21@iiits.in") {
-        // Fetch all news if the user is an admin
+     
         const response = await fetch("/api/news");
         const data = await response.json();
         setNewsData(data);
       } else {
-        // Fetch bookmarked news if the user is not an admin
+
         const response = await fetch(`/api/users/${session?.user.id}/bookmarks`);
         const data = await response.json();
         setNewsData(data);

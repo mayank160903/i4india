@@ -4,7 +4,7 @@ import "@styles/globals.css";
 import Nav from "@components/Nav";
 import Provider from "@components/Provider";
 import Footer from "@components/Footer";
-import DynamicHero from "@components/DynamicHero"; // New client-side component
+import DynamicHero from "@components/DynamicHero";
 import { useState } from "react";
 
 export default function RootLayout({ children }) {

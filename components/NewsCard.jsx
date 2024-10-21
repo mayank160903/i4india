@@ -17,7 +17,7 @@ const NewsCard = ({ news, handleEdit, handleDelete }) => {
   const [showFullDescription, setShowFullDescription] = useState(false);
   
 
-  const DESCRIPTION_LIMIT = 150; // Limit for the truncated description
+  const DESCRIPTION_LIMIT = 150; 
 
   const convertToISTTimeOnly = (createdAt) => {
     const date = new Date(createdAt);
@@ -89,7 +89,7 @@ const NewsCard = ({ news, handleEdit, handleDelete }) => {
         await navigator.share({
           title: news.title,
           text: news.description,
-          url: news.videoUrl, // Share current URL or the news URL
+          url: news.videoUrl,
         });
       } catch (error) {
         console.error("Error sharing:", error);
@@ -99,14 +99,6 @@ const NewsCard = ({ news, handleEdit, handleDelete }) => {
     }
   };
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-      alert("Link copied to clipboard!");
-    }).catch((error) => {
-      console.error("Failed to copy link:", error);
-    });
-  };
-
   const toggleDescription = () => {
     setShowFullDescription((prev) => !prev);
   };
@@ -114,58 +106,76 @@ const NewsCard = ({ news, handleEdit, handleDelete }) => {
   const embedUrl = getEmbedUrl(news.videoUrl);
 
   return (
-    <div className="bg-white playfair-display-font-content w-96 border max-w-2xl border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 my-4 p-4 flex flex-col justify-between">
-      <div className="video_container mb-4">
-        {embedUrl ? (
-          <iframe
-            width="100%"
-            height="200"
-            src={embedUrl}
-            title={news.title}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className=""
-          ></iframe>
-        ) : (
-          <Image
-            src="/assets/icons/i4india.png"
-            width={300}
-            height={100}
-            alt="logo"
-            className=""
-          />
-        )}
-      </div>
-      <div className="flex-grow">
-        <h5 className="mb-2 text-xl playfair-display-font tracking-tight text-gray-900 dark:text-white">
-          {news.title}
-        </h5>
-        <p className="mb-4 text-gray-700 dark:text-gray-400">
-          {showFullDescription
-            ? news.description
-            : news.description.slice(0, DESCRIPTION_LIMIT)}
-          {news.description.length > DESCRIPTION_LIMIT && (
-            <span
-              onClick={toggleDescription}
-              className="text-blue-600 cursor-pointer hover:underline ml-2"
-            >
-              {showFullDescription ? "Read Less" : "...Read More"}
-            </span>
-          )}
-        </p>
-        <p className="text-gray-500 text-xs mb-4">
-          Published on: {convertToISTTimeOnly(news.createdAt)}
-        </p>
-        <div className="flex justify-between items-center mb-4">
-          <div className="flex items-center text-gray-700 dark:text-gray-300">
-            {isBookmarked ? (<div>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
-  <path fill-rule="evenodd" d="M6.32 2.577a49.255 49.255 0 0 1 11.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 0 1-1.085.67L12 18.089l-7.165 3.583A.75.75 0 0 1 3.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93Z" clip-rule="evenodd" />
-</svg>
+    <div className="bg-white playfair-display-font-content w-96 border max-w-2xl border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 my-4 p-4 flex flex-col justify-between h-[500px]">  {/* Set a fixed height */}
+  <div className="video_container mb-4">
+    {embedUrl ? (
+      <iframe
+        width="100%"
+        height="200"
+        src={embedUrl}
+        title={news.title}
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        className=""
+      ></iframe>
+    ) : (
+      <Image
+        src="/assets/icons/i4india.png"
+        width={300}
+        height={100}
+        alt="logo"
+        className=""
+      />
+    )}
+  </div>
 
-            </div>) : (<div>
-              <svg
+  <div className="flex-grow">
+    <h5 className="mb-2 text-xl playfair-display-font tracking-tight text-gray-900 dark:text-white">
+      {news.title}
+    </h5>
+    <p className="mb-4 text-gray-700 playfair-display-font-content dark:text-gray-400">
+      {showFullDescription
+        ? news.description
+        : news.description.slice(0, DESCRIPTION_LIMIT)}
+      {news.description.length > DESCRIPTION_LIMIT && (
+        <span
+          onClick={toggleDescription}
+          className="text-blue-600 cursor-pointer hover:underline ml-2"
+        >
+          {showFullDescription ? "Read Less" : "...Read More"}
+        </span>
+      )}
+    </p>
+    <p className="text-gray-500 text-xs mb-4">
+      Published on: {convertToISTTimeOnly(news.createdAt)}
+    </p>
+  </div>
+
+  {/* Buttons section, fixed at the bottom */}
+  <div className="mt-auto">
+    <div className="flex justify-between items-center">
+      <div className="flex items-center text-gray-700 dark:text-gray-300">
+        {isBookmarked ? (
+          <div>
+            {/* Bookmark icon when bookmarked */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="w-5 h-5"
+            >
+              <path
+                fillRule="evenodd"
+                d="M6.32 2.577a49.255 49.255 0 0 1 11.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 0 1-1.085.67L12 18.089l-7.165 3.583A.75.75 0 0 1 3.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93Z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </div>
+        ) : (
+          <div>
+            {/* Bookmark icon when not bookmarked */}
+            <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -179,90 +189,67 @@ const NewsCard = ({ news, handleEdit, handleDelete }) => {
                 d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z"
               />
             </svg>
-            </div>)}
-            
-            <span className="ml-2">{news.bookmarks?.length || 0}</span>
-            <button className="ml-5 items-center" onClick={handleShare}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
-            </svg>
-
-            </button>
           </div>
-          <button onClick={handleViewVideo} className="text-blue-600 hover:underline">
-            View Video
-          </button>
-        </div>
-      </div>
+        )}
 
-      {isSharePopupVisible && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h2 className="text-lg font-bold mb-4">Share this news</h2>
-            <div className="flex flex-col gap-2">
-              <button
-                onClick={copyToClipboard}
-                className="w-full inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300"
-              >
-                Copy Link
-              </button>
-              <button
-                onClick={() => setIsSharePopupVisible(false)}
-                className="w-full inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-600 rounded-lg hover:bg-gray-700 focus:ring-4 focus:ring-gray-300"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+        <span className="ml-2">{news.bookmarks?.length || 0}</span>
 
-      {session?.user?.email === "mayank.g21@iiits.in" && handleEdit && handleDelete && (
-        <div className="mt-5 flex gap-4 border-t border-gray-100 pt-3">
-          <button
-            className="text-sm text-green-600 hover:underline"
-            onClick={() => handleEdit(news._id)}
-          >
-            Edit
-          </button>
-          <button
-            className="text-sm text-red-600 hover:underline"
-            onClick={() => handleDelete(news._id)}
-          >
-            Delete
-          </button>
-        </div>
-      )}
-
-      {!isBookmarked && session?.user && session?.user?.email !== "mayank.g21@iiits.in" && (
-        <button
-          className="mt-4 w-full inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-700 rounded-lg hover:bg-gray-900 focus:ring-4 focus:ring-blue-300"
-          onClick={handleBookmark}
-        >
-          Add to bookmarks
-        </button>
-      )}
-
-      {isBookmarked && session?.user?.email !== "mayank.g21@iiits.in" && (
-        <div className="mt-4 flex items-center text-gray-400">
+        <button className="ml-5 items-center" onClick={handleShare}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            className="w-5 h-5 mr-2"
+            className="w-5 h-5"
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+              d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z"
             />
           </svg>
-          <span className="text-sm">Added to Bookmarks!</span>
-        </div>
-      )}
+        </button>
+      </div>
+      <button
+        onClick={handleViewVideo}
+        className="text-blue-600 hover:underline"
+      >
+        View Video
+      </button>
     </div>
+
+    {!isBookmarked && session?.user && session?.user?.email !== "mayank.g21@iiits.in" && (
+      <button
+        className="mt-4 w-full inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-700 rounded-lg hover:bg-gray-900 focus:ring-4 focus:ring-blue-300"
+        onClick={handleBookmark}
+      >
+        Add to bookmarks
+      </button>
+    )}
+
+    {isBookmarked && session?.user?.email !== "mayank.g21@iiits.in" && (
+      <div className="mt-4 flex items-center text-gray-400">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="currentColor"
+          className="w-5 h-5 mr-2"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+          />
+        </svg>
+        <span className="text-sm">Added to Bookmarks!</span>
+      </div>
+    )}
+  </div>
+</div>
+
   );
 };
 

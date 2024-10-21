@@ -11,7 +11,7 @@ const UserProfile = ({ params }) => {
 
   const [userBookmarks, setUserBookmarks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); // State to handle error
+  const [error, setError] = useState(null); 
 
   useEffect(() => {
     const fetchBookmarks = async () => {
@@ -42,7 +42,7 @@ const UserProfile = ({ params }) => {
   }, [params.id]);
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>; // Display error message
+  if (error) return <p>Error: {error}</p>; 
 
   return (
     <Profile
